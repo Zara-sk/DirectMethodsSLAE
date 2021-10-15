@@ -27,6 +27,16 @@ namespace Svyatazar
             Elem = new double[n];
         }
 
+        public Vector(int n, int x)
+        {
+            N = n;
+            Elem = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                Elem[i] = x;
+            }
+        }
+
         public static Vector operator *(Vector T, double Scal)
         {
             Vector RES = new Vector(T.N);
@@ -55,6 +65,21 @@ namespace Svyatazar
             for (int i = 0; i < V1.N; i++)
             {
                 Res += V1.Elem[i] * V2.Elem[i];
+            }
+
+            return Res;
+        }
+
+
+        public static Vector operator -(Vector V1, Vector V2)
+        {
+            if (V1.N != V2.N) throw new Exception("Вычитание невозможно (Размеры векторов различны).");
+
+            Vector Res = new Vector(V1.N);
+
+            for (int i = 0; i < V1.N; i++)
+            {
+                Res.Elem[i] = V1.Elem[i] - V2.Elem[i];
             }
 
             return Res;

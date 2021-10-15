@@ -33,7 +33,7 @@ namespace Svyatazar
 
             for (int i = F.N - 1; i >= 0; i--)
             {
-                if (Math.Abs(A.Elem[i][i]) < CONST.EPS) throw new Exception("Direct row substitution: division by zero");
+                if (Math.Abs(A.Elem[i][i]) < CONST.EPS) throw new Exception("Back row substitution: division by zero");
 
                 for (int j = F.N - 1; j > i; j--)
                 {

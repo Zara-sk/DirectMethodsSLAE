@@ -21,6 +21,22 @@ namespace Svyatazar
 
         public Matrix(){}
 
+        public Matrix(int n)
+        {
+            Random rnd = new Random();
+            M = n; N = n;
+            double[][] elem = new double[n][];
+            for (int i = 0; i < n; i++)
+            {
+                elem[i] = new double[n];
+                for (int j = 0; j < n; j++)
+                {
+                    elem[i][j] = rnd.NextDouble();
+                }
+            }
+            Elem = elem;
+        }
+
         public Matrix(int m, int n)
         {
             M = m; N = n;
@@ -34,6 +50,17 @@ namespace Svyatazar
                 }
             }
             Elem = elem;
+        }
+
+        public void Hilbert()
+        {
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    Elem[i][j] = 1.0 / (3.0 + i + j);
+                }
+            }
         }
 
         public void Copy(Matrix A)

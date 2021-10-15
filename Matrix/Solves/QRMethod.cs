@@ -50,15 +50,12 @@ namespace Svyatazar
 
             double res1, res2;
 
-            Matrix Xt = new Matrix(N, N);
-            Xt.Copy(X);
-
             for (int k = 0; k < N; k++)
             {
                 res1 = cosFi * X[j][k] + sinFi * X[i][k];
                 res2 = -sinFi * X[j][k] + cosFi * X[i][k];
-                Xt[j][k] = res1;
-                Xt[i][k] = res2;
+                X[j][k] = res1;
+                X[i][k] = res2;
             }
 
             for (int k = 0; k < N; k++)
@@ -69,7 +66,6 @@ namespace Svyatazar
                 Q[k][i] = res2;
             }
 
-            X.Copy(Xt);
         }
 
         private void BuildMatrixes()
@@ -97,11 +93,7 @@ namespace Svyatazar
         public Vector Solve()
         {
             BuildMatrixes();
-
-            Q.print();
-            R.print();
             Y.Copy(Q.Transpouse() * F);
-            Y.print();
 
             SubstitutionMethod.BackRowSubstitution(R, Y, RES);
 

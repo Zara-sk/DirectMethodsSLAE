@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Svyatazar
 {
@@ -13,30 +10,67 @@ namespace Svyatazar
 
     class Program
     {
+        static double getDelta(Vector x_true, Vector x)
+        {
+            double RES;
+
+            RES = (x - x_true) * (x - x_true) / (x_true * x_true);
+
+            return RES;
+        }
         static void Main(string[] args)
         {
             try
             {
-                int N = 3;
-                Matrix A = new Matrix(N, N);
-                Vector F = new Vector(N);
-                Vector RES = new Vector(N);
-
-                var Elem_A = new double[][]
+                int[] ns = { 2, 5, 10 };
+                foreach(int N in ns)
                 {
-                    new double[] { -2, -2, -1 },
-                    new double[] {  1,  0, -2 },
-                    new double[] {  0,  1,  2 },
-                };
+                    Console.WriteLine($"Для N = {N}");
+                    Matrix A = new Matrix(N, N);
+                    A.Hilbert();
+                    Vector F = new Vector(N);
+                    Vector RES = new Vector(N);
+                    Vector RES_true = new Vector(N, 1);
 
-                A.Elem = Elem_A;
+                    F = A * RES_true;
 
-                var Elem_F = new double[] { -5, -1, 3};
-                F.Elem = Elem_F;
+                    Matrix Av = new Matrix(N, N);
+                    Vector Fv = new Vector(N);
 
-                QRMethod Solver = new QRMethod(A, F);
-                RES = Solver.Solve();
-                RES.print();
+                    //gauss
+                    Console.WriteLine();
+                    Av.Copy(A);
+                    Fv.Copy(F);
+
+                    GaussMethod GaussSolver = new GaussMethod();
+                    RES = GaussSolver.Solve(Av, Fv);
+                    RES.print();
+                    Console.WriteLine($"delta for Gauss = {getDelta(RES_true, RES)}");
+
+
+                    //lu
+                    Console.WriteLine();
+                    Av.Copy(A);
+                    Fv.Copy(F);
+
+                    LUMethod LUSolver = new LUMethod();
+                    RES = LUSolver.Solve(Av, Fv); 
+                    RES.print();
+                    Console.WriteLine($"delta for LU = {getDelta(RES_true, RES)}");
+
+                    //qr
+                    Console.WriteLine();
+                    Av.Copy(A);
+                    Fv.Copy(F);
+
+                    QRMethod QRSolver = new QRMethod(Av, Fv);
+                    RES = QRSolver.Solve();
+                    RES.print();
+                    Console.WriteLine($"delta for QR = {getDelta(RES_true, RES)}");
+
+
+                    Console.WriteLine();
+                }
 
             }
             catch (Exception E)
