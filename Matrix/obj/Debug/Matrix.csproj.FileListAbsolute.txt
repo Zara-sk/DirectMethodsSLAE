@@ -1,0 +1,7 @@
+Z:\NSTU\ЧМ\LW1\Matrix\Matrix\bin\Debug\Matrix.exe.config
+Z:\NSTU\ЧМ\LW1\Matrix\Matrix\bin\Debug\Matrix.exe
+Z:\NSTU\ЧМ\LW1\Matrix\Matrix\bin\Debug\Matrix.pdb
+Z:\NSTU\ЧМ\LW1\Matrix\Matrix\obj\Debug\Matrix.csproj.AssemblyReference.cache
+Z:\NSTU\ЧМ\LW1\Matrix\Matrix\obj\Debug\Matrix.csproj.CoreCompileInputs.cache
+Z:\NSTU\ЧМ\LW1\Matrix\Matrix\obj\Debug\Matrix.exe
+Z:\NSTU\ЧМ\LW1\Matrix\Matrix\obj\Debug\Matrix.pdb
